@@ -3,28 +3,27 @@ package hiber.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
 public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @Column(name = "name")
-   private String firstName;
-
-   @Column(name = "last_name")
+   private String name;
+   private String email;
    private String lastName;
 
-   @Column(name = "email")
-   private String email;
+   @OneToOne
+   @JoinColumn(name = "car_id")
+   private Car car;
 
    public User() {}
-   
-   public User(String firstName, String lastName, String email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
+
+   public User(String name, String email, String lastName, Car car) {
+      this.name = name;
       this.email = email;
+      this.lastName = lastName;
+      this.car = car;
    }
 
    public Long getId() {
@@ -35,12 +34,20 @@ public class User {
       this.id = id;
    }
 
-   public String getFirstName() {
-      return firstName;
+   public String getName() {
+      return name;
    }
 
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
    }
 
    public String getLastName() {
@@ -51,11 +58,11 @@ public class User {
       this.lastName = lastName;
    }
 
-   public String getEmail() {
-      return email;
+   public Car getCar() {
+      return car;
    }
 
-   public void setEmail(String email) {
-      this.email = email;
+   public void setCar(Car car) {
+      this.car = car;
    }
 }
